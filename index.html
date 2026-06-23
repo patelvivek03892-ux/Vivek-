@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <title>Untitled</title>
+    <link rel="stylesheet" href="./style.css">
+
+  </head>
+    
+  <body>
+  <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PhishGuard - Phishing Detection Tool</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="[cdnjs.cloudflare.com](https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css)">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">
+            <i class="fas fa-shield-halved"></i>
+            <span>PhishGuard</span>
+        </div>
+        <ul class="nav-links">
+            <li><a href="#url-scanner">URL Scanner</a></li>
+            <li><a href="#email-analyzer">Email Analyzer</a></li>
+            <li><a href="#tips">Safety Tips</a></li>
+        </ul>
+    </nav>
+    <header class="hero">
+        <div class="hero-content">
+            <h1>Protect Yourself from Phishing Attacks</h1>
+            <p>Analyze suspicious URLs and emails before you click. Stay safe online.</p>
+            <a href="#url-scanner" class="cta-button">Start Scanning</a>
+        </div>
+        <div class="hero-stats">
+            <div class="stat">
+                <i class="fas fa-bug"></i>
+                <span class="stat-number">5.4B+</span>
+                <span class="stat-label">Malware attacks yearly</span>
+            </div>
+            <div class="stat">
+                <i class="fas fa-envelope-open-text"></i>
+                <span class="stat-number">48%</span>
+                <span class="stat-label">Ransomware share</span>
+            </div>
+            <div class="stat">
+                <i class="fas fa-virus"></i>
+                <span class="stat-number">500K+</span>
+                <span class="stat-label">New malware daily</span>
+            </div>
+        </div>
+    </header>
+    <main>
+        <!-- URL Scanner Section -->
+        <section id="url-scanner" class="scanner-section">
+            <div class="section-header">
+                <i class="fas fa-link"></i>
+                <h2>URL Scanner</h2>
+                <p>Paste a suspicious URL to analyze it for phishing indicators</p>
+            </div>
+            <div class="scanner-box">
+                <div class="input-group">
+                    <input type="url" id="url-input" placeholder="[example.com](https://example.com/suspicious-link)">
+                    <button id="scan-url-btn" class="scan-btn">
+                        <i class="fas fa-search"></i> Scan URL
+                    </button>
+                </div>
+                <div id="url-results" class="results-container hidden">
+                    <div class="result-header">
+                        <div class="risk-badge" id="url-risk-badge">
+                            <i class="fas fa-circle-check"></i>
+                            <span>Safe</span>
+                        </div>
+                    </div>
+                    <div class="result-details" id="url-details"></div>
+                </div>
+            </div>
+        </section>
+        <!-- Email Analyzer Section -->
+        <section id="email-analyzer" class="scanner-section">
+            <div class="section-header">
+                <i class="fas fa-envelope"></i>
+                <h2>Email Analyzer</h2>
+                <p>Paste email content to check for phishing characteristics</p>
+            </div>
+            <div class="scanner-box">
+                <div class="input-group vertical">
+                    <input type="email" id="sender-input" placeholder="Sender email address (e.g., support@bank.com)">
+                    <input type="text" id="subject-input" placeholder="Email subject line">
+                    <textarea id="email-input" placeholder="Paste the email body content here..."></textarea>
+                    <button id="analyze-email-btn" class="scan-btn">
+                        <i class="fas fa-magnifying-glass"></i> Analyze Email
+                    </button>
+                </div>
+                <div id="email-results" class="results-container hidden">
+                    <div class="result-header">
+                        <div class="risk-badge" id="email-risk-badge">
+                            <i class="fas fa-circle-check"></i>
+                            <span>Safe</span>
+                        </div>
+                    </div>
+                    <div class="result-details" id="email-details"></div>
+                </div>
+            </div>
+        </section>
+        <!-- Safety Tips Section -->
+        <section id="tips" class="tips-section">
+            <div class="section-header">
+                <i class="fas fa-lightbulb"></i>
+                <h2>Phishing Protection Tips</h2>
+                <p>Learn how to recognize and avoid phishing attacks</p>
+            </div>
+            <div class="tips-grid">
+                <div class="tip-card">
+                    <i class="fas fa-eye"></i>
+                    <h3>Inspect URLs Carefully</h3>
+                    <p>Hover over links before clicking. Check for misspellings like "amaz0n.com" or unusual domains.</p>
+                </div>
+                <div class="tip-card">
+                    <i class="fas fa-clock"></i>
+                    <h3>Beware of Urgency</h3>
+                    <p>Phishers create artificial deadlines. Legitimate organizations rarely demand immediate action.</p>
+                </div>
+                <div class="tip-card">
+                    <i class="fas fa-user-secret"></i>
+                    <h3>Verify Sender Identity</h3>
+                    <p>Contact organizations through official channels, not links in suspicious emails.</p>
+                </div>
+                <div class="tip-card">
+                    <i class="fas fa-lock"></i>
+                    <h3>Enable MFA</h3>
+                    <p>Multi-factor authentication protects accounts even if credentials are compromised.</p>
+                </div>
+                <div class="tip-card">
+                    <i class="fas fa-download"></i>
+                    <h3>Avoid Unknown Attachments</h3>
+                    <p>Don't open attachments from unknown senders. They may contain malware.</p>
+                </div>
+                <div class="tip-card">
+                    <i class="fas fa-graduation-cap"></i>
+                    <h3>Stay Informed</h3>
+                    <p>Regular security training helps you recognize evolving phishing tactics.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <div class="footer-content">
+            <div class="footer-logo">
+                <i class="fas fa-shield-halved"></i>
+                <span>PhishGuard</span>
+            </div>
+            <p>Protecting you from phishing attacks. Stay vigilant, stay safe.</p>
+            <div class="footer-links">
+                <a href="#url-scanner">URL Scanner</a>
+                <a href="#email-analyzer">Email Analyzer</a>
+                <a href="#tips">Safety Tips</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 PhishGuard. Educational tool for phishing awareness.</p>
+        </div>
+    </footer>
+    <script src="script.js"></script>
+</body>
+</html>
+    <script  src="./script.js"></script>
+
+  </body>
+  
+</html>
