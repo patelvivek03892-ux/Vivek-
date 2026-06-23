@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PhishGuard - Phishing Detection System</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Segoe UI',sans-serif;
+}
+
+body{
+    background:linear-gradient(135deg,#0f172a,#1e293b);
+    min-height:100vh;
+    color:white;
+}
+
+header{
+    background:rgba(255,255,255,0.05);
+    backdrop-filter:blur(10px);
+    padding:20px 10%;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.logo{
+    font-size:28px;
+    font-weight:bold;
+    color:#38bdf8;
+}
+
+nav a{
+    color:white;
+    text-decoration:none;
+    margin-left:20px;
+}
+
+.hero{
+    text-align:center;
+    padding:80px 20px;
+}
+
+.hero h1{
+    font-size:3rem;
+    margin-bottom:15px;
+}
+
+.hero p{
+    color:#cbd5e1;
+    margin-bottom:30px;
+}
+
+.detector-box{
+    max-width:700px;
+    margin:auto;
+    background:rgba(255,255,255,0.08);
+    padding:30px;
+    border-radius:20px;
+    backdrop-filter:blur(15px);
+}
+
+input{
+    width:100%;
+    padding:15px;
+    border:none;
+    border-radius:10px;
+    margin-bottom:20px;
+    font-size:16px;
+}
+
+button{
+    width:100%;
+    padding:15px;
+    border:none;
+    border-radius:10px;
+    background:#38bdf8;
+    color:white;
+    font-size:18px;
+    cursor:pointer;
+    transition:.3s;
+}
+
+button:hover{
+    background:#0ea5e9;
+}
+
+.result{
+    margin-top:25px;
+    padding:20px;
+    border-radius:10px;
+    display:none;
+}
+
+.safe{
+    background:#14532d;
+}
+
+.danger{
+    background:#7f1d1d;
+}
+
+.score{
+    font-size:24px;
+    font-weight:bold;
+    margin-top:10px;
+}
+
+.features{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:20px;
+    padding:60px 10%;
+}
+
+.card{
+    background:rgba(255,255,255,0.08);
+    padding:25px;
+    border-radius:15px;
+}
+
+footer{
+    text-align:center;
+    padding:25px;
+    color:#94a3b8;
+}
+</style>
+</head>
+<body>
+
+<header>
+    <div class="logo">PhishGuard</div>
+    <nav>
+        <a href="#">Home</a>
+        <a href="#">Features</a>
+        <a href="#">About</a>
+    </nav>
+</header>
+
+<section class="hero">
+    <h1>Phishing Attack Detection</h1>
+    <p>Analyze URLs and detect phishing threats instantly.</p>
+
+    <div class="detector-box">
+        <input type="text" id="urlInput"
+               placeholder="Enter URL to analyze">
+
+        <button onclick="analyzeURL()">
+            Scan Website
+        </button>
+
+        <div id="result" class="result"></div>
+    </div>
+</section>
+
+<section class="features">
+    <div class="card">
+        <h3>URL Analysis</h3>
+        <p>Detect suspicious URLs using security indicators.</p>
+    </div>
+
+    <div class="card">
+        <h3>Risk Scoring</h3>
+        <p>Provides phishing probability score.</p>
+    </div>
+
+    <div class="card">
+        <h3>Instant Results</h3>
+        <p>Real-time phishing detection analysis.</p>
+    </div>
+</section>
+
+<footer>
+    © 2026 PhishGuard | Cyber Security Project
+</footer>
+
+<script>
+
+function analyzeURL() {
+
+    const url = document.getElementById("urlInput").value.trim();
+    const result = document.getElementById("result");
+
+    if(url === ""){
+        alert("Please enter a URL");
+        return;
+    }
+
+    let score = 0;
+    let reasons = [];
+
+    // HTTPS Check
+    if(!url.startsWith("https://")){
+        score += 20;
+        reasons.push("Missing HTTPS encryption");
+    }
+
+    // Long URL
+    if(url.length > 75){
+        score += 15;
+        reasons.push("Unusually long URL");
+    }
+
+    // IP Address Detection
+    const ipPattern =
+    /(\d{1,3}\.){3}\d{1,3}/;
+
+    if(ipPattern.test(url)){
+        score += 25;
+        reasons.push("Contains IP Address");
+    }
+
+    // Suspicious Keywords
+    const suspiciousWords = [
+        "login",
+        "verify",
+        "secure",
+        "update",
+        "banking",
+        "account",
+        "password",
+        "paypal",
+        "signin",
+        "confirm"
+    ];
+
+    suspiciousWords.forEach(word=>{
+        if(url.toLowerCase().includes(word)){
+            score += 10;
+            reasons.push(
+                `Suspicious keyword: ${word}`
+            );
+        }
+    });
+
+    // Too many dots
+    const dotCount = (url.match(/\./g)||[]).length;
+
+    if(dotCount > 4){
+        score += 15;
+        reasons.push("Excessive subdomains");
+    }
+
+    // URL Shorteners
+    const shorteners = [
+        "bit.ly",
+        "tinyurl",
+        "goo.gl",
+        "t.co",
+        "rb.gy"
+    ];
+
+    shorteners.forEach(site=>{
+        if(url.includes(site)){
+            score += 20;
+            reasons.push("URL Shortening Service");
+        }
+    });
+
+    let verdict;
+
+    if(score >= 50){
+        verdict = "⚠ Potential Phishing Website";
+        result.className = "result danger";
+    }
+    else{
+        verdict = "✅ Appears Safe";
+        result.className = "result safe";
+    }
+
+    result.style.display = "block";
+
+    result.innerHTML = `
+        <h2>${verdict}</h2>
+        <div class="score">
+            Risk Score: ${score}/100
+        </div>
+        <br>
+        <strong>Detection Report:</strong>
+        <ul style="margin-top:10px;padding-left:20px;">
+            ${
+              reasons.length
+              ? reasons.map(r=>`<li>${r}</li>`).join("")
+              : "<li>No major phishing indicators found.</li>"
+            }
+        </ul>
+    `;
+}
+
+</script>
+
+</body>
+</html>
